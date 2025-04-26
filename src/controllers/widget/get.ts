@@ -2,7 +2,7 @@
 
 // Get a single widget by ID
 import {Context} from "koa";
-import {widgets} from "../../db/database";
+import {widgetsCollection} from "../../db/database";
 import { validate as isValidUuid } from 'uuid';
 
 export async function getWidget(ctx: Context): Promise<void> {
@@ -17,7 +17,7 @@ export async function getWidget(ctx: Context): Promise<void> {
         };
         return;
     }
-    const widget = widgets.findOne({ id });
+    const widget = widgetsCollection.findOne({ id });
 
     if (!widget) {
         ctx.status = 404;

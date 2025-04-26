@@ -6,7 +6,7 @@ import {Widget} from "../models/widget";
 const db = new Loki('operandio.db');
 
 // Create a collection for widgets
-const widgets = db.addCollection('widgets', {
+const widgetsCollection = db.addCollection('widgets', {
     indices: ['id'],
     unique: ['id']
 });
@@ -31,6 +31,6 @@ const sampleWidgets: Widget[] = [
     }
 ];
 
-sampleWidgets.forEach(widget => widgets.insert(widget));
+sampleWidgets.forEach(widget => widgetsCollection.insert(widget));
 
-export { db, widgets };
+export { db, widgetsCollection };

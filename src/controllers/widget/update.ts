@@ -2,11 +2,11 @@
 // Update an existing widget
 import {Context} from "koa";
 import {Widget} from "../../models/widget";
-import {widgets} from "../../db/database";
+import {widgetsCollection} from "../../db/database";
 
 export async function updateWidget(ctx: Context): Promise<void> {
     const id = ctx.params.id;
-    const existingWidget = widgets.findOne({ id }) as Widget | null;
+    const existingWidget = widgetsCollection.findOne({ id }) as Widget | null;
 
     if (!existingWidget) {
         ctx.status = 404;
@@ -27,7 +27,7 @@ export async function updateWidget(ctx: Context): Promise<void> {
     });
 
     // Update the database
-    widgets.update(existingWidget);
+    widgetsCollection.update(existingWidget);
 
     ctx.body = {
         status: 'success',

@@ -1,7 +1,7 @@
 // Create a new widget
 import {Widget} from "../../models/widget";
 import {Context} from "koa";
-import {widgets} from "../../db/database";
+import {widgetsCollection} from "../../db/database";
 
 /**
  * Creates a new widget and adds it to the `widgets` collection in the database.
@@ -28,7 +28,7 @@ export async function createWidget(ctx: Context): Promise<void> {
         return;
     }
 
-    if (widgets.findOne({ id: body.id })) {
+    if (widgetsCollection.findOne({ id: body.id })) {
         ctx.status = 409; // Conflict
         ctx.body = {
             status: 'error',
@@ -47,7 +47,7 @@ export async function createWidget(ctx: Context): Promise<void> {
         updatedAt: now
     };
 
-    widgets.insert(newWidget);
+    widgetsCollection.insert(newWidget);
 
     ctx.status = 201;
     ctx.body = {
