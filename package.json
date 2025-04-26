@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -21,14 +23,20 @@
   "devDependencies": {
     "@types/koa": "^2.15.0",
     "@types/koa-bodyparser": "^4.3.12",
+    "@types/koa-logger": "^3.1.5",
     "@types/koa-router": "^7.4.8",
+    "@types/lokijs": "^1.5.14",
     "@types/node": "^22.15.2",
+    "@types/uuid": "^10.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "dependencies": {
     "koa": "^2.16.1",
     "koa-bodyparser": "^4.4.1",
-    "koa-router": "^13.0.1"
+    "koa-logger": "^3.2.1",
+    "koa-router": "^13.0.1",
+    "lokijs": "^1.5.12",
+    "uuid": "^11.1.0"
   }
 }
