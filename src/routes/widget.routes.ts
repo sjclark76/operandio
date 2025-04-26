@@ -1,6 +1,5 @@
 import Router from 'koa-router';
-import {createWidget, getWidget, listWidgets, updateWidget} from "../controllers/widget";
-
+import { createWidget, getWidget, listWidgets, updateWidget } from '../controllers/widget';
 
 const router = new Router({ prefix: '/api/widgets' });
 
