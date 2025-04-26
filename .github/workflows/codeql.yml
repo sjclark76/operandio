@@ -22,7 +22,7 @@ jobs:
       fail-fast: false
       matrix:
         language: ['javascript-typescript'] # Define the languages to analyze
-        build-mode: ['automatic'] # Define the build mode explicitly
+        build-mode: ['autobuild'] # Define the build mode explicitly
 
     steps:
       - name: Checkout repository
