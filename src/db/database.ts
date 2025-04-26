@@ -6,7 +6,7 @@ import { Widget } from '../schemas/widget.schema';
 const db = new Loki('operandio.db');
 
 // Create a collection for widgets
-const widgetsCollection = db.addCollection('widgets', {
+const widgetsCollection = db.addCollection<Widget>('widgets', {
   indices: ['id'],
   unique: ['id'],
 });
