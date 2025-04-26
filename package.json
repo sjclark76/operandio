@@ -19,8 +19,16 @@
   },
   "homepage": "https://github.com/sjclark76/operandio#readme",
   "devDependencies": {
+    "@types/koa": "^2.15.0",
+    "@types/koa-bodyparser": "^4.3.12",
+    "@types/koa-router": "^7.4.8",
     "@types/node": "^22.15.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "koa": "^2.16.1",
+    "koa-bodyparser": "^4.4.1",
+    "koa-router": "^13.0.1"
   }
 }
