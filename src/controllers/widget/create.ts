@@ -1,7 +1,7 @@
 // Create a new widget
-import { Widget } from '../../models/widget';
 import { Context } from 'koa';
 import { widgetsCollection } from '../../db/database';
+import { createWidgetSchema, Widget, widgetSchema } from '../../schemas/widget.schema';
 
 /**
  * Creates a new widget and adds it to the `widgets` collection in the database.
@@ -17,18 +17,20 @@ import { widgetsCollection } from '../../db/database';
  * 5. Responds with a 201 Created status and the newly created widget data.
  */
 export async function createWidget(ctx: Context): Promise<void> {
-  const body = ctx.request.body as Partial<Widget>;
+  const validationResult = createWidgetSchema.safeParse(ctx.request.body);
 
-  if (!body.id || !body.name || !body.description || body.image === undefined) {
+  if (!validationResult.success) {
     ctx.status = 400;
     ctx.body = {
       status: 'error',
-      message: 'Missing required fields: id, name, description',
+      message: validationResult.error,
     };
     return;
   }
 
-  if (widgetsCollection.findOne({ id: body.id })) {
+  const { description, id, image, name } = validationResult.data;
+
+  if (widgetsCollection.findOne({ id: id })) {
     ctx.status = 409; // Conflict
     ctx.body = {
       status: 'error',
@@ -39,19 +41,19 @@ export async function createWidget(ctx: Context): Promise<void> {
 
   const now = new Date();
   const newWidget: Widget = {
-    id: body.id,
-    name: body.name,
-    description: body.description,
-    image: body.image,
+    id,
+    name,
+    description,
+    image,
     createdAt: now,
     updatedAt: now,
   };
 
-  widgetsCollection.insert(newWidget);
+  const insertedWidget = widgetsCollection.insert(newWidget);
 
   ctx.status = 201;
   ctx.body = {
     status: 'success',
-    data: newWidget,
+    data: widgetSchema.parse(insertedWidget), // Remove extra db fields
   };
 }

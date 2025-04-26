@@ -1,6 +1,6 @@
 import Loki from 'lokijs';
 import { v4 as uuidv4 } from 'uuid';
-import { Widget } from '../models/widget';
+import { Widget } from '../schemas/widget.schema';
 
 // Initialize the database
 const db = new Loki('operandio.db');

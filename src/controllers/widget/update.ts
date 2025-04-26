@@ -1,10 +1,21 @@
 // Update an existing widget
 import { Context } from 'koa';
-import { Widget } from '../../models/widget';
 import { widgetsCollection } from '../../db/database';
+import { updateWidgetSchema, Widget, widgetSchema } from '../../schemas/widget.schema';
+import { validate as isValidUuid } from 'uuid';
 
 export async function updateWidget(ctx: Context): Promise<void> {
   const id = ctx.params.id;
+
+  if (!isValidUuid(id)) {
+    ctx.status = 400;
+    ctx.body = {
+      status: 'error',
+      message: 'Invalid UUID format',
+    };
+    return;
+  }
+
   const existingWidget = widgetsCollection.findOne({ id }) as Widget | null;
 
   if (!existingWidget) {
@@ -16,20 +27,32 @@ export async function updateWidget(ctx: Context): Promise<void> {
     return;
   }
 
-  const body = ctx.request.body as Partial<Widget>;
+  const validationResult = updateWidgetSchema.safeParse(ctx.request.body);
+
+  if (!validationResult.success) {
+    ctx.status = 400;
+    ctx.body = {
+      status: 'error',
+      message: validationResult.error,
+    };
+    return;
+  }
+
+  const { description, image, name } = validationResult.data;
 
   // Update the widget
   Object.assign(existingWidget, {
-    name: body.name ?? existingWidget.name,
-    description: body.description ?? existingWidget.description,
+    name: name ?? existingWidget.name,
+    description: description ?? existingWidget.description,
+    image: image ?? existingWidget.image,
     updatedAt: new Date(),
   });
 
   // Update the database
-  widgetsCollection.update(existingWidget);
+  const updatedWidget = widgetsCollection.update(existingWidget);
 
   ctx.body = {
     status: 'success',
-    data: existingWidget,
+    data: widgetSchema.parse(updatedWidget), // Remove extra db fields,
   };
 }

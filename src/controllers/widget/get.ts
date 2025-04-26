@@ -2,6 +2,7 @@
 import { Context } from 'koa';
 import { widgetsCollection } from '../../db/database';
 import { validate as isValidUuid } from 'uuid';
+import { widgetSchema } from '../../schemas/widget.schema';
 
 export async function getWidget(ctx: Context): Promise<void> {
   const id = ctx.params.id;
@@ -28,6 +29,6 @@ export async function getWidget(ctx: Context): Promise<void> {
 
   ctx.body = {
     status: 'success',
-    data: widget,
+    data: widgetSchema.parse(widget), // Remove extra db fields,
   };
 }
