@@ -2,6 +2,7 @@ import bodyParser from 'koa-bodyparser';
 import Koa from 'koa';
 import logger from 'koa-logger';
 import widgetRoutes from './routes/widget.routes';
+import doodatRoutes from './routes/doodat.routes';
 
 // Type guard to check if error is an object with a status property
 function isHttpError(err: unknown): err is { status: number; message: string } {
@@ -47,6 +48,7 @@ app.use(async (ctx, next) => {
 
 // Routes
 app.use(widgetRoutes.routes());
+app.use(doodatRoutes.routes());
 app.use(widgetRoutes.allowedMethods());
 
 // Start server

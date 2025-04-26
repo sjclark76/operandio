@@ -1,10 +1,5 @@
 import { z } from 'zod';
-import { validate as isValidUuid } from 'uuid';
-
-// Custom UUID validator
-const uuidSchema = z.string().refine((val) => isValidUuid(val), {
-  message: 'Invalid UUID format',
-});
+import { uuidSchema } from './shared.schema';
 
 // Schema for widget creation
 export const createWidgetSchema = z.object({
