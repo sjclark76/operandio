@@ -50,10 +50,4 @@ src/
 ├── schemas/       # Data validation schemas
 ├── index.ts       # Application entry point
 ```
-```graph TD
-A[Client] -->|HTTP Requests| B[Koa Application]
-B --> C[Routes]
-C --> D[Controllers]
-D --> E[Database]
-D --> F[Schemas]
-```
+
