@@ -1,7 +1,6 @@
 // Get a single widget by ID
 import { Context } from 'koa';
 import { widgetsCollection } from '../../db/database';
-import { validate as isValidUuid } from 'uuid';
 import { widgetSchema } from '../../schemas/widget.schema';
 
 export async function getWidget(ctx: Context): Promise<void> {
