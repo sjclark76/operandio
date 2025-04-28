@@ -7,15 +7,6 @@ import { widgetSchema } from '../../schemas/widget.schema';
 export async function getWidget(ctx: Context): Promise<void> {
   const id = ctx.params.id;
 
-  // Validate that the ID is a valid UUID
-  if (!isValidUuid(id)) {
-    ctx.status = 400;
-    ctx.body = {
-      status: 'error',
-      message: 'Invalid UUID format',
-    };
-    return;
-  }
   const widget = widgetsCollection.findOne({ id });
 
   if (!widget) {

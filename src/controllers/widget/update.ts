@@ -2,19 +2,9 @@
 import { Context } from 'koa';
 import { widgetsCollection } from '../../db/database';
 import { updateWidgetSchema, Widget, widgetSchema } from '../../schemas/widget.schema';
-import { validate as isValidUuid } from 'uuid';
 
 export async function updateWidget(ctx: Context): Promise<void> {
   const id = ctx.params.id;
-
-  if (!isValidUuid(id)) {
-    ctx.status = 400;
-    ctx.body = {
-      status: 'error',
-      message: 'Invalid UUID format',
-    };
-    return;
-  }
 
   const existingWidget = widgetsCollection.findOne({ id }) as Widget | null;
 
