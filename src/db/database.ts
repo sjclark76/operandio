@@ -41,7 +41,7 @@ const sampleDoodats: Doodat[] = [
     name: 'Basic Doodat',
     description: 'A simple widget for everyday use',
     image: 'https://medium.com/@tahavoncelik/flutter-widgets-and-basic-widget-types-eba583033d5a',
-    price: 10,
+    price: { value: 10, currency: 'NZD' },
     createdAt: new Date(),
     updatedAt: new Date(),
   },
@@ -51,7 +51,7 @@ const sampleDoodats: Doodat[] = [
     description: 'A high-end widget with advanced features',
     image:
       'https://www.fishfacecycles.com/product/components/handlebar-tape/widget-premium-silicone-wrap-handlebar-tape-fluo-yellow/',
-    price: 100,
+    price: { value: 100, currency: 'NZD' },
     createdAt: new Date(),
     updatedAt: new Date(),
   },

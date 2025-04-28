@@ -26,7 +26,73 @@ Start the development server:
 
 `npm run dev`
 
+## Routes
 
+The application provides the following RESTful API routes for managing widgets:
+
+### Widget Routes
+
+- **GET api/widgets**  
+  Retrieves a paginated list of widgets.  
+  Query Parameters:
+   - `page` (optional): The page number (default is 1).
+   - `size` (optional): The number of items per page (default is 10).
+
+- **GET api/widgets/:id**  
+  Retrieves a specific widget by its ID.  
+  Path Parameters:
+   - `id`: The unique identifier of the widget.
+
+- **POST api/widgets**  
+  Creates a new widget.  
+  Request Body:
+   - `id` (string): The unique identifier for the widget.
+   - `name` (string): The name of the widget.
+   - `description` (string): A description of the widget.
+   - `image` (string): A URL to an image of the widget.
+
+- **PUT api/widgets/:id**  
+  Updates an existing widget by its ID.  
+  Path Parameters:
+   - `id`: The unique identifier of the widget.  
+     Request Body:
+   - `name` (string, optional): The updated name of the widget.
+   - `description` (string, optional): The updated description of the widget.
+   - `image` (string, optional): The updated image URL of the widget.
+
+### Doodat Routes
+
+- **GET api/doodats**
+  Retrieves a paginated list of doodats.
+  Query Parameters:
+   - `page` (optional): The page number (default is 1).
+   - `size` (optional): The number of items per page (default is 10).
+
+- **GET api/doodats/:id**
+  Retrieves a specific doodat by its ID.
+  Path Parameters:
+   - `id`: The unique identifier of the doodat.
+
+- **POST api/doodats**
+  Creates a new doodat.
+  Request Body:
+   - `id` (string): The unique identifier for the doodat.
+   - `name` (string): The name of the doodat.
+   - `description` (string): A description of the doodat.
+   - `image` (string): A URL to an image of the doodat.
+   - `price` (monetaryAmount): the price  & currency of the doodat
+
+- **PUT api/doodats/:id**
+  Updates an existing doodat by its ID.
+  Path Parameters:
+   - `id`: The unique identifier of the doodat.
+     Request Body:
+   - `name` (string, optional): The updated name of the doodat.
+   - `description` (string, optional): The updated description of the doodat.
+   - `image` (string, optional): The updated image URL of the doodat.
+   - `price` (monetaryAmount): the price  & currency of the doodat
+
+  
 ### Building the Project
 To build the project for production:
 
